@@ -9,7 +9,11 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod1 
+set $mod2 Mod4 
+set $monitor eDP-1-1 # my laptop's internal screen
+set $monitor2 HDMI-1-2 # external screen, they are set here to make it easier to move to new setups
+
 
 # ADD Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 +5% #increase sound volume
@@ -37,6 +41,9 @@ exec --no-startup-id dropbox start #dropbox start
 exec --no-startup-id nmcli con up id 222
 bindsym $mod+Shift+m exec --no-startup-id i3-msg 'exec /usr/bin/google-chrome --new-window  https://web.skype.com/ https://outlook.office.com/owa/' 
 bindsym $mod+Ctrl+p exec --no-startup-id i3lock  -c 00001a
+
+# AAA dual monitor
+bindsym XF86Display exec --no-startup-id sh ~/bin/bash/screencheck.sh $monitor $monitor2
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -119,7 +126,34 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-# switch to workspace
+# ADD workspace and screen
+workspace 0 output $monitor
+workspace 1 output $monitor
+workspace 2 output $monitor
+workspace 3 output $monitor
+workspace 4 output $monitor
+workspace 5 output $monitor
+workspace 6 output $monitor
+workspace 7 output $monitor
+workspace 8 output $monitor
+workspace 9 output $monitor
+workspace 10 output $monitor
+
+
+workspace 20 output $monitor2
+workspace 21 output $monitor2
+workspace 22 output $monitor2
+workspace 23 output $monitor2
+workspace 24 output $monitor2
+workspace 25 output $monitor2
+workspace 26 output $monitor2
+workspace 27 output $monitor2
+workspace 28 output $monitor2
+workspace 29 output $monitor2
+workspace 30 output $monitor2
+
+# ADD switch to workspace second
+bindsym $mod+grave workspace 0
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
@@ -131,7 +165,9 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
+
 # move focused container to workspace
+bindsym $mod+Shift+grave move container to workspace 0
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
@@ -142,6 +178,35 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
+
+# switch to workspace laptop
+bindsym $mod2+grave workspace 20
+bindsym $mod2+1 workspace 21
+bindsym $mod2+2 workspace 22
+bindsym $mod2+3 workspace 23
+bindsym $mod2+4 workspace 24
+bindsym $mod2+5 workspace 25
+bindsym $mod2+6 workspace 26
+bindsym $mod2+7 workspace 27
+bindsym $mod2+8 workspace 28
+bindsym $mod2+9 workspace 29
+bindsym $mod2+0 workspace 30
+
+
+# move focused container to workspace
+bindsym $mod2+Shift+grave move container to workspace 20
+bindsym $mod2+Shift+1 move container to workspace 21
+bindsym $mod2+Shift+2 move container to workspace 22
+bindsym $mod2+Shift+3 move container to workspace 23
+bindsym $mod2+Shift+4 move container to workspace 24
+bindsym $mod2+Shift+5 move container to workspace 25
+bindsym $mod2+Shift+6 move container to workspace 26
+bindsym $mod2+Shift+7 move container to workspace 27
+bindsym $mod2+Shift+8 move container to workspace 28
+bindsym $mod2+Shift+9 move container to workspace 29
+bindsym $mod2+Shift+0 move container to workspace 30
+
+
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
