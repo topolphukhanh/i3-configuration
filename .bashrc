@@ -145,4 +145,5 @@ export PATH="/home/khanhtcp/pycharm-community-2018.3/bin:$PATH"
 alias nautilus='nautilus --no-desktop&'
 alias kaggle="~/.local/bin/kaggle"
 
-
+#set path lib
+export PATH="/usr/local/bin:$PATH"

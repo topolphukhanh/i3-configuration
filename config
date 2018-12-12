@@ -28,8 +28,8 @@ bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightnessctl set 5%- # 
 
 # ADD start to each time we log into i3 window manager
 exec --no-startup-id ibus-daemon & 
-bindsym $mod+Shift+n exec --no-startup-id ibus engine xkb:us::eng
-bindsym $mod+Shift+v exec --no-startup-id ibus engine Unikey - Unikey 
+bindsym $mod+Ctrl+n exec --no-startup-id ibus engine xkb:us::eng
+bindsym $mod+Ctrl+v exec --no-startup-id ibus engine Unikey - Unikey 
 
 # ADD Touchpad controls
 #bindsym XF86TouchpadToggle exec --no-startup-id /home/khanhtcp/bin/bash/toggletouchpad.sh #no use - toggle touchpad
@@ -39,11 +39,18 @@ bindsym XF86TouchpadToggle exec --no-startup-id synclient TouchpadOff=1 # disabl
 # ADD start dropbox + some apps
 exec --no-startup-id dropbox start #dropbox start
 exec --no-startup-id nmcli con up id 222
-bindsym $mod+Shift+m exec --no-startup-id i3-msg 'exec /usr/bin/google-chrome --new-window  https://web.skype.com/ https://outlook.office.com/owa/' 
-bindsym $mod+Ctrl+p exec --no-startup-id i3lock  -c 00001a
 
-# AAA dual monitor
-bindsym XF86Display exec --no-startup-id sh ~/bin/bash/screencheck.sh $monitor $monitor2
+# ADD some hot-keys
+bindsym $mod+Shift+m workspace "4:ebox"; layout tabbed; exec --no-startup-id i3-msg 'exec firefox --new-window  https://web.skype.com/ https://outlook.office.com/owa/ https://mail.google.com/mail/u/0 https://mail.google.com/mail/u/1' 
+bindsym $mod+Ctrl+p exec --no-startup-id i3lock  -c 00001a
+bindsym $mod+Shift+n workspace "0:note"; layout tabbed; exec --no-startup-id lowriter; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://onenote.com'
+
+bindsym $mod2+Shift+m workspace 24; layout tabbed; exec --no-startup-id i3-msg 'exec firefox --new-window  https://web.skype.com/  https://outlook.office.com/owa/ https://mail.google.com/mail/u/0 https://mail.google.com/mail/u/1'
+bindsym $mod2+Shift+n workspace 20; layout tabbed; exec --no-startup-id lowriter; exec --no-startup-id i3-msg  'exec google-chrome --new-window https://onenote.com'
+
+# AAA dual monitor => change in /usr/local/bin  sson-dell sson-lg ssoff
+#bindsym XF86Display exec --no-startup-id sh /home/khanhtcp/bin/bash/screencheck.sh $monitor $monitor2
+#bindsym $mode+Shift+o exec --no-startup-id xrandr --output eDP-1-1 --auto --rotate normal --pos 0x0 --output eDP-1-1 --auto --rotate left --left-of HDMI-1-2
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -153,11 +160,11 @@ workspace 29 output $monitor2
 workspace 30 output $monitor2
 
 # ADD switch to workspace second
-bindsym $mod+grave workspace 0
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
+bindsym $mod+grave workspace "0:note"
+bindsym $mod+1 workspace "1:res"
+bindsym $mod+2 workspace "2:gpu52"
+bindsym $mod+3 workspace "3:gpu53"
+bindsym $mod+4 workspace "4:ebox"
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
@@ -165,13 +172,12 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
-
 # move focused container to workspace
-bindsym $mod+Shift+grave move container to workspace 0
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+grave move container to workspace "0:note"
+bindsym $mod+Shift+1 move container to workspace "1:res"
+bindsym $mod+Shift+2 move container to workspace "2:gpu52"
+bindsym $mod+Shift+3 move container to workspace "3:gpu53"
+bindsym $mod+Shift+4 move container to workspace "4:ebox"
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
@@ -192,7 +198,6 @@ bindsym $mod2+8 workspace 28
 bindsym $mod2+9 workspace 29
 bindsym $mod2+0 workspace 30
 
-
 # move focused container to workspace
 bindsym $mod2+Shift+grave move container to workspace 20
 bindsym $mod2+Shift+1 move container to workspace 21
@@ -205,8 +210,6 @@ bindsym $mod2+Shift+7 move container to workspace 27
 bindsym $mod2+Shift+8 move container to workspace 28
 bindsym $mod2+Shift+9 move container to workspace 29
 bindsym $mod2+Shift+0 move container to workspace 30
-
-
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
