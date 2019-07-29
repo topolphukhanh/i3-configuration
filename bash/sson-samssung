@@ -1,0 +1,2 @@
+#!/bin/bash
+xrandr --output eDP-1-1 --auto --rotate normal --pos 0x0 --output HDMI-1-2 --mode 2560x1440_40.00 --verbose --above eDP-1-1

@@ -23,8 +23,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 # ADD Sreen brightness controls
 #bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 #bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
-bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightnessctl set 5%+ # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightnessctl set 5%- # decrease screen brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightnessctl set 10%+ # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightnessctl set 10%- # decrease screen brightness
 
 # ADD start to each time we log into i3 window manager
 exec --no-startup-id ibus-daemon & 
@@ -38,15 +38,26 @@ bindsym XF86TouchpadToggle exec --no-startup-id synclient TouchpadOff=1 # disabl
 
 # ADD start dropbox + some apps
 exec --no-startup-id dropbox start #dropbox start
-exec --no-startup-id nmcli con up id 222
+
+# ADD feh desktop background
+exec --no-startup-id feh --bg-fill ~/Pictures/Linux_file_system_hierachy.png
+
+# ADD start VPN222
+#exec --no-startup-id nmcli con up id 222
 
 # ADD some hot-keys
-bindsym $mod+Ctrl+m workspace "4:ebox"; layout tabbed; exec --no-startup-id i3-msg 'exec firefox --new-window  https://web.skype.com/ https://outlook.office.com/owa/ https://mail.google.com/mail/u/0 https://mail.google.com/mail/u/1' 
 bindsym $mod+Ctrl+p exec --no-startup-id i3lock  -c 00001a
-bindsym $mod+Ctrl+n workspace "0:note"; layout tabbed; exec --no-startup-id lowriter; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://onenote.com'
+bindsym $mod+Ctrl+` workspace 0; layout tabbed; exec --no-startup-id lowriter; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://onenote.com'
+bindsym $mod+Ctrl+7 workspace 7:plan; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://drive.google.com/drive/u/0/my-drive'
+bindsym $mod+Ctrl+8 workspace 8:cale; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://calendar.google.com/calendar/b/1/r/week https://calendar.google.com/calendar/b/0/r'
+bindsym $mod+Ctrl+9 workspace 9:kanb; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://kanbanflow.com/board/N1xkfm'
+bindsym $mod+Ctrl+0 workspace 10:box; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://mail.google.com/mail/u/4 https://mail.google.com/mail/u/0 https://mail.google.com/mail/u/5'
 
-bindsym $mod2+Ctrl+m workspace 24; layout tabbed; exec --no-startup-id i3-msg 'exec firefox --new-window  https://web.skype.com/  https://outlook.office.com/owa/ https://mail.google.com/mail/u/0 https://mail.google.com/mail/u/1'
-bindsym $mod2+Ctrl+n workspace 20; layout tabbed; exec --no-startup-id lowriter; exec --no-startup-id i3-msg  'exec google-chrome --new-window https://onenote.com'
+bindsym $mod2+Ctrl+` workspace c0; layout tabbed; exec --no-startup-id lowriter; exec --no-startup-id i3-msg  'exec google-chrome --new-window https://onenote.com'
+bindsym $mod2+Ctrl+7 workspace c7; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://drive.google.com/drive/u/0/my-drive'
+bindsym $mod2+Ctrl+8 workspace c8; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://calendar.google.com/calendar/b/1/r/week https://calendar.google.com/calendar/b/0/r'
+bindsym $mod2+Ctrl+9 workspace c9; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://kanbanflow.com/board/N1xkfm'
+bindsym $mod2+Ctrl+0 workspace c10; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://mail.google.com/mail/u/4 https://mail.google.com/mail/u/0 https://mail.google.com/mail/u/5'
 
 # Screen Shots
 bindsym Print exec gnome-screenshot -i
@@ -137,13 +148,13 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # ADD workspace and screen
-workspace 0 output $monitor
-workspace 1 output $monitor
-workspace 2 output $monitor
-workspace 3 output $monitor
-workspace 4 output $monitor
-workspace 5 output $monitor
-workspace 6 output $monitor
+workspace 0:res output $monitor
+workspace 1:res output $monitor
+workspace 2:cod output $monitor
+workspace 3:ter output $monitor
+workspace 4:box output $monitor
+workspace 5:rel output $monitor
+workspace 6:tem output $monitor
 workspace 7 output $monitor
 workspace 8 output $monitor
 workspace 9 output $monitor
@@ -163,30 +174,30 @@ workspace c9 output $monitor2
 workspace c10 output $monitor2
 
 # ADD switch to workspace second
-bindsym $mod+grave workspace "0:note"
-bindsym $mod+1 workspace "1:rese"
-bindsym $mod+2 workspace "2:gpu2"
-bindsym $mod+3 workspace "3:gpu3"
-bindsym $mod+4 workspace "4:ebox"
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+grave workspace 0:res
+bindsym $mod+1 workspace 1:res
+bindsym $mod+2 workspace 2:res
+bindsym $mod+3 workspace 3:ter
+bindsym $mod+4 workspace 4:cod
+bindsym $mod+5 workspace 5:rel
+bindsym $mod+6 workspace 6:tem
+bindsym $mod+7 workspace 7:plan
+bindsym $mod+8 workspace 8:cale
+bindsym $mod+9 workspace 9:kanb
+bindsym $mod+0 workspace 10:box
 
 # move focused container to workspace
-bindsym $mod+Shift+grave move container to workspace "0:note"
-bindsym $mod+Shift+1 move container to workspace "1:rese"
-bindsym $mod+Shift+2 move container to workspace "2:gpu2"
-bindsym $mod+Shift+3 move container to workspace "3:gpu3"
-bindsym $mod+Shift+4 move container to workspace "4:ebox"
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+grave move container to workspace 0:res
+bindsym $mod+Shift+1 move container to workspace 1:res
+bindsym $mod+Shift+2 move container to workspace 2:res
+bindsym $mod+Shift+3 move container to workspace 3:ter
+bindsym $mod+Shift+4 move container to workspace 4:cod
+bindsym $mod+Shift+5 move container to workspace 5:rel
+bindsym $mod+Shift+6 move container to workspace 6:tem
+bindsym $mod+Shift+7 move container to workspace 7:plan
+bindsym $mod+Shift+8 move container to workspace 8:cale
+bindsym $mod+Shift+9 move container to workspace 9:kanb
+bindsym $mod+Shift+0 move container to workspace 10:box
 
 # switch to workspace laptop
 bindsym $mod2+grave workspace c0
