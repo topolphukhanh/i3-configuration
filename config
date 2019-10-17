@@ -14,6 +14,18 @@ set $mod2 Mod4
 set $monitor eDP-1-1 # my laptop's internal screen
 set $monitor2 HDMI-1-2 # external screen, they are set here to make it easier to move to new setups
 
+# Configuration border style <normal|1pixel|pixel xx|none|pixel>
+new_window pixel 1
+new_float normal
+
+# Hide borders
+hide_edge_borders none
+
+# Change borders
+bindsym $mod+u border none
+bindsym $mod+y border pixel 1
+bindsym $mod+n border normal
+
 
 # ADD Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 +5% #increase sound volume
@@ -25,6 +37,9 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 #bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightnessctl set 10%+ # increase screen brightness
 bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightnessctl set 10%- # decrease screen brightness
+
+# ADD start to SSH Dev server
+#exce --no-startup-id ssh -L 8000:localhost:9998 khanh_tran2@35.221.68.91 
 
 # ADD start to each time we log into i3 window manager
 exec --no-startup-id ibus-daemon & 
@@ -39,25 +54,25 @@ bindsym XF86TouchpadToggle exec --no-startup-id synclient TouchpadOff=1 # disabl
 # ADD start dropbox + some apps
 exec --no-startup-id dropbox start #dropbox start
 
-# ADD feh desktop background
-exec --no-startup-id feh --bg-fill ~/Pictures/Linux_file_system_hierachy.png
+# ADD feh desktop background (install feh)
+exec --no-startup-id feh --bg-fill ~/Pictures/vim_cheat.png
 
 # ADD start VPN222
 #exec --no-startup-id nmcli con up id 222
 
 # ADD some hot-keys
 bindsym $mod+Ctrl+p exec --no-startup-id i3lock  -c 00001a
-bindsym $mod+Ctrl+` workspace 0; layout tabbed; exec --no-startup-id lowriter; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://onenote.com'
+bindsym $mod+Ctrl+grave workspace 0:new; layout tabbed; exec --no-startup-id lowriter; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://onenote.com'
 bindsym $mod+Ctrl+7 workspace 7:plan; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://drive.google.com/drive/u/0/my-drive'
-bindsym $mod+Ctrl+8 workspace 8:cale; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://calendar.google.com/calendar/b/1/r/week https://calendar.google.com/calendar/b/0/r'
-bindsym $mod+Ctrl+9 workspace 9:kanb; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://kanbanflow.com/board/N1xkfm'
-bindsym $mod+Ctrl+0 workspace 10:box; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://mail.google.com/mail/u/4 https://mail.google.com/mail/u/0 https://mail.google.com/mail/u/5'
+bindsym $mod+Ctrl+8 workspace 8:cal; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://calendar.google.com/calendar/b/1/r/week'
+bindsym $mod+Ctrl+9 workspace 9:kan; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://kanbanflow.com/board/N1xkfm'
+bindsym $mod+Ctrl+m workspace 10:box; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://mail.google.com/mail/u/0 https://mail.google.com/mail/u/1 https://mail.google.com/mail/u/2'
 
-bindsym $mod2+Ctrl+` workspace c0; layout tabbed; exec --no-startup-id lowriter; exec --no-startup-id i3-msg  'exec google-chrome --new-window https://onenote.com'
+bindsym $mod2+Ctrl+grave workspace c0:new; layout tabbed; exec --no-startup-id lowriter; exec --no-startup-id i3-msg  'exec google-chrome --new-window https://onenote.com'
 bindsym $mod2+Ctrl+7 workspace c7; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://drive.google.com/drive/u/0/my-drive'
 bindsym $mod2+Ctrl+8 workspace c8; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://calendar.google.com/calendar/b/1/r/week https://calendar.google.com/calendar/b/0/r'
 bindsym $mod2+Ctrl+9 workspace c9; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://kanbanflow.com/board/N1xkfm'
-bindsym $mod2+Ctrl+0 workspace c10; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://mail.google.com/mail/u/4 https://mail.google.com/mail/u/0 https://mail.google.com/mail/u/5'
+bindsym $mod2+Ctrl+m workspace c10; layout tabbed; exec --no-startup-id i3-msg 'exec google-chrome --new-window https://mail.google.com/mail/u/0 https://mail.google.com/mail/u/1 https://mail.google.com/mail/u/2'
 
 # Screen Shots
 bindsym Print exec gnome-screenshot -i
@@ -68,11 +83,11 @@ bindsym Print exec gnome-screenshot -i
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+#font pango:monospace 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
+font pango:DejaVu Sans Mono 8
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -92,16 +107,18 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
+bindsym $mod2+d exec dmenu_run
+
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -110,10 +127,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -122,10 +139,11 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+z split h
 
 # split in vertical orientation
 bindsym $mod+v split v
+bindsym $mod+q split toggle
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -148,25 +166,25 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # ADD workspace and screen
-workspace 0:res output $monitor
+workspace 0:new output $monitor
 workspace 1:res output $monitor
-workspace 2:cod output $monitor
-workspace 3:ter output $monitor
-workspace 4:box output $monitor
-workspace 5:rel output $monitor
+workspace 2:res output $monitor
+workspace 3:jup output $monitor
+workspace 4:edt output $monitor
+workspace 5:ter output $monitor
 workspace 6:tem output $monitor
-workspace 7 output $monitor
-workspace 8 output $monitor
-workspace 9 output $monitor
-workspace 10 output $monitor
+workspace 7:pla output $monitor
+workspace 8:cal output $monitor
+workspace 9:kan output $monitor
+workspace 10:box output $monitor
 
 
-workspace c0 output $monitor2
-workspace c1 output $monitor2
-workspace c2 output $monitor2
-workspace c3 output $monitor2
-workspace c4 output $monitor2
-workspace c5 output $monitor2
+workspace c0:new output $monitor2
+workspace c1:res output $monitor2
+workspace c2:res output $monitor2
+workspace c3:jup output $monitor2
+workspace c4:edt output $monitor2
+workspace c5:ter output $monitor2
 workspace c6 output $monitor2
 workspace c7 output $monitor2
 workspace c8 output $monitor2
@@ -174,38 +192,38 @@ workspace c9 output $monitor2
 workspace c10 output $monitor2
 
 # ADD switch to workspace second
-bindsym $mod+grave workspace 0:res
+bindsym $mod+grave workspace 0:new
 bindsym $mod+1 workspace 1:res
 bindsym $mod+2 workspace 2:res
-bindsym $mod+3 workspace 3:ter
-bindsym $mod+4 workspace 4:cod
-bindsym $mod+5 workspace 5:rel
+bindsym $mod+3 workspace 3:jup
+bindsym $mod+4 workspace 4:edt
+bindsym $mod+5 workspace 5:ter
 bindsym $mod+6 workspace 6:tem
-bindsym $mod+7 workspace 7:plan
-bindsym $mod+8 workspace 8:cale
-bindsym $mod+9 workspace 9:kanb
+bindsym $mod+7 workspace 7:pla
+bindsym $mod+8 workspace 8:cal
+bindsym $mod+9 workspace 9:kan
 bindsym $mod+0 workspace 10:box
 
 # move focused container to workspace
-bindsym $mod+Shift+grave move container to workspace 0:res
+bindsym $mod+Shift+grave move container to workspace 0:new
 bindsym $mod+Shift+1 move container to workspace 1:res
 bindsym $mod+Shift+2 move container to workspace 2:res
-bindsym $mod+Shift+3 move container to workspace 3:ter
-bindsym $mod+Shift+4 move container to workspace 4:cod
-bindsym $mod+Shift+5 move container to workspace 5:rel
+bindsym $mod+Shift+3 move container to workspace 3:jup
+bindsym $mod+Shift+4 move container to workspace 4:edt
+bindsym $mod+Shift+5 move container to workspace 5:ter
 bindsym $mod+Shift+6 move container to workspace 6:tem
-bindsym $mod+Shift+7 move container to workspace 7:plan
-bindsym $mod+Shift+8 move container to workspace 8:cale
-bindsym $mod+Shift+9 move container to workspace 9:kanb
+bindsym $mod+Shift+7 move container to workspace 7:pla
+bindsym $mod+Shift+8 move container to workspace 8:cal
+bindsym $mod+Shift+9 move container to workspace 9:kan
 bindsym $mod+Shift+0 move container to workspace 10:box
 
 # switch to workspace laptop
-bindsym $mod2+grave workspace c0
-bindsym $mod2+1 workspace c1
-bindsym $mod2+2 workspace c2
-bindsym $mod2+3 workspace c3
-bindsym $mod2+4 workspace c4
-bindsym $mod2+5 workspace c5
+bindsym $mod2+grave workspace c0:new
+bindsym $mod2+1 workspace c1:res
+bindsym $mod2+2 workspace c2:res
+bindsym $mod2+3 workspace c3:jup
+bindsym $mod2+4 workspace c4:edt
+bindsym $mod2+5 workspace c5:ter
 bindsym $mod2+6 workspace c6
 bindsym $mod2+7 workspace c7
 bindsym $mod2+8 workspace c8
@@ -213,12 +231,12 @@ bindsym $mod2+9 workspace c9
 bindsym $mod2+0 workspace c10
 
 # move focused container to workspace
-bindsym $mod2+Shift+grave move container to workspace c0
-bindsym $mod2+Shift+1 move container to workspace c1
-bindsym $mod2+Shift+2 move container to workspace c2
-bindsym $mod2+Shift+3 move container to workspace c3
-bindsym $mod2+Shift+4 move container to workspace c4
-bindsym $mod2+Shift+5 move container to workspace c5
+bindsym $mod2+Shift+grave move container to workspace c0:new
+bindsym $mod2+Shift+1 move container to workspace c1:res
+bindsym $mod2+Shift+2 move container to workspace c2:res
+bindsym $mod2+Shift+3 move container to workspace c3:jup
+bindsym $mod2+Shift+4 move container to workspace c4:edt
+bindsym $mod2+Shift+5 move container to workspace c5:ter
 bindsym $mod2+Shift+6 move container to workspace c6
 bindsym $mod2+Shift+7 move container to workspace c7
 bindsym $mod2+Shift+8 move container to workspace c8
@@ -235,21 +253,20 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-
         # Pressing left will shrink the window’s width.
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 4 px or 4 ppt
+        bindsym j resize grow height 4 px or 4 ppt
+        bindsym k resize shrink height 4 px or 4 ppt
+        bindsym l resize grow width 4 px or 4 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 4 px or 4 ppt
+        bindsym Down resize grow height 4 px or 4 ppt
+        bindsym Up resize shrink height 4 px or 4 ppt
+        bindsym Right resize grow width 4 px or 4 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -263,4 +280,46 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
         tray_output primary
+}
+
+# https://gitlab.com/dwt1/dotfiles/blob/master/.i3/config
+# Press $mod+Shift+g to enter the gap mode. 
+# Choose o or i for modifying outer/inner gaps.
+# Press one of + / - (in-/decrement for current workspace) 
+# or 0 (remove gaps for current workspace). If you also press Shift 
+# with these keys, the change will be global for all workspaces.
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus    gaps outer current plus 5
+        bindsym minus   gaps outer current minus 5
+        bindsym 0       gaps outer current set 0
+
+        bindsym Shift+plus      gaps outer all plus 5
+        bindsym Shift+minus     gaps outer all minus 5
+        bindsym Shift+0         gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
 }

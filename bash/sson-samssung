@@ -1,2 +1,5 @@
 #!/bin/bash
-xrandr --output eDP-1-1 --auto --rotate normal --pos 0x0 --output HDMI-1-2 --mode 2560x1440_40.00 --verbose --above eDP-1-1
+cvt 2560 1440 
+xrandr --newmode "2560x1440_40.00"  201.00  2560 2720 2984 3408  1440 1443 1448 1476 +hsync +vsync 
+xrandr --addmode HDMI-1-2 2560x1440_40.00 
+xrandr --output eDP-1-1 --auto --rotate normal --pos 0x0 --output HDMI-1-2 --mode 2560x1440_40.00 --verbose --right-of eDP-1-1

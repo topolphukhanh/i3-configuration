@@ -1,0 +1,2 @@
+#!/bin/bash
+nohup /home/khanhtcp/anaconda3/envs/py35/bin/python /home/khanhtcp/anaconda3/envs/py35/bin/jupyter-notebook --notebook-dir=/source --port=8888 > /source/logs/jupyter.log & 
